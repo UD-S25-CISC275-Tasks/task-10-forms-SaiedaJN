@@ -14,7 +14,7 @@ export function ChangeColor(): React.JSX.Element {
                         name="color"
                         value={color}
                         checked={selectedColor === color}
-                        onChange={() => setSelectedColor(color)}
+                        onChange={() => {setSelectedColor(color)}}
                     />
                     {color}
                 </label>

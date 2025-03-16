@@ -24,7 +24,7 @@ export function GiveAttempts(): React.JSX.Element {
             <input
                 type="number"
                 value={requestedAttempts}
-                onChange={(e) => setRequestedAttempts(Number(e.target.value))}
+                onChange={(e) => {setRequestedAttempts(Number(e.target.value))}}
             />
             <button onClick={handleUseAttempt} disabled={attemptsLeft === 0}>
                 Use

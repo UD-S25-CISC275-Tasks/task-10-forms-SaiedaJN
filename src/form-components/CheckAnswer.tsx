@@ -13,7 +13,7 @@ export function CheckAnswer({
             <input
                 type="text"
                 value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
+                onChange={(e) => {setUserAnswer(e.target.value)}}
                 placeholder="Enter your answer"
             />
             <span>
