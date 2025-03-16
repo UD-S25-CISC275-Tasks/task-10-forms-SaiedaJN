@@ -1,48 +1,54 @@
 import React, { useState } from "react";
+import { Form } from "react-bootstrap";
 
-export function EditMode(): React.JSX.Element {
-    const [isEditMode, setIsEditMode] = useState(false);
-    const [name, setName] = useState("Your Name");
-    const [isStudent, setIsStudent] = useState(true);
-
+export function EditMode(): JSX.Element {
+    const [username, setUserName] = useState<string>("Your Name");
+    const [isStudent, setStudent] = useState<boolean>(true);
+    const [isEdit, setEdit] = useState<boolean>(false);
+    function updateMode(event: React.ChangeEvent<HTMLInputElement>) {
+        setEdit(event.target.checked);
+    }
+    function updateStatus(event: React.ChangeEvent<HTMLInputElement>) {
+        setStudent(event.target.checked);
+    }
+    function updateName(event: React.ChangeEvent<HTMLInputElement>) {
+        setUserName(event.target.value);
+    }
+    function checkBox(): JSX.Element {
+        return (
+            <div>
+                <Form.Check
+                    type="checkbox"
+                    id="is-student-check"
+                    label="Student?"
+                    checked={isStudent}
+                    onChange={updateStatus}
+                    disabled={!isEdit}
+                />
+                <Form.Group controlId="get student username">
+                    <Form.Label>Name:</Form.Label>
+                    <Form.Control
+                        type="textbox"
+                        value={username}
+                        onChange={updateName}
+                        disabled={!isEdit}
+                    />
+                </Form.Group>
+            </div>
+        );
+    }
     return (
         <div>
             <h3>Edit Mode</h3>
-            <div className="form-switch">
-                <label>
-                    Edit Mode
-                    <input
-                        type="checkbox"
-                        checked={isEditMode}
-                        onChange={() => setIsEditMode(!isEditMode)}
-                    />
-                </label>
-            </div>
-            {isEditMode ? (
-                <div>
-                    <label>
-                        Name:
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        <input
-                            type="checkbox"
-                            checked={isStudent}
-                            onChange={(e) => setIsStudent(e.target.checked)}
-                        />
-                        Student
-                    </label>
-                </div>
-            ) : (
-                <>
-                    <p>{name} is {isStudent ? "a student" : "not a student"}.</p>
-                    <input type="hidden" />
-                </>
-            )}
+            <Form.Switch
+                type="switch"
+                id="is-edit-check"
+                label="Edit Mode?"
+                checked={isEdit}
+                onChange={updateMode}
+            />
+            {isEdit === true ? checkBox() : <span> Not in edit mode</span>}
+            {username} is {isStudent ? "a student" : "not a student"}
         </div>
     );
 }
