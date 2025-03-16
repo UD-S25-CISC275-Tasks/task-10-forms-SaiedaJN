@@ -38,9 +38,10 @@ export function EditMode(): React.JSX.Element {
                     </label>
                 </div>
             ) : (
-                <p>
-                    {name} is {isStudent ? "a student" : "not a student"}.
-                </p>
+                <>
+                    <p>{name} is {isStudent ? "a student" : "not a student"}.</p>
+                    <input type="hidden" />
+                </>
             )}
         </div>
     );
